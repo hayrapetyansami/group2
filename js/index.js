@@ -115,12 +115,3 @@ app.isOpened(9, 24);
 const client = app.callCenter();
 
 console.log(client);
-
-
-const obj = {
-	sami(text) {
-		console.log(text);
-	}
-};
-
-obj.sami("Hello dear Armenia");
