@@ -9,23 +9,23 @@ const app = {
 		{instagram: "http://instagram.com/"},
 		{type: "Ռեստորան"},
 		{isDelivery: true},
-		{isOpen: true}
+		{isOpen: false}
 	],
 	restaurantStaff: [
 		{security: "Էդգար Գեվորգյան"},
-        {security: "Արսեն Ավագյան"},
-        {waiter: "Մելքոն Դանիելյան"},
-        {waiter: "Ալիսա Պողոսյան"},
-        {waiter: "Նելլի Դավթյան"},
-        {waiter: "Քրիստինե Արսենյան"},
-        {barman: "Տիգրան Ռուբենյան"},
-        {barman: "Անի Առուստամյան"},
-        {cook: "Կարինե Տոնոյան"},
-        {cook: "Արտակ Ադամյան"},
-        {administrator: "Լիկա Ավագյանց"},
-        {courier: "Սամսոն Խաչատրյան"},
-        {hostess: "Ալիսա Սուրենյանց"},
-        {customer: "Մանե Սարգսյան"}
+		{security: "Արսեն Ավագյան"},
+		{waiter: "Մելքոն Դանիելյան"},
+		{waiter: "Ալիսա Պողոսյան"},
+		{waiter: "Նելլի Դավթյան"},
+		{waiter: "Քրիստինե Արսենյան"},
+		{barman: "Տիգրան Ռուբենյան"},
+		{barman: "Անի Առուստամյան"},
+		{cook: "Կարինե Տոնոյան"},
+		{cook: "Արտակ Ադամյան"},
+		{administrator: "Լիկա Ավագյանց"},
+		{courier: "Սամսոն Խաչատրյան"},
+		{hostess: "Ալիսա Սուրենյանց"},
+		{customer: "Մանե Սարգսյան"}
 	],
 	restaurantMenu: [
 		{
@@ -79,29 +79,33 @@ const app = {
             item7: "Բրաունի"
         }
 	],
-	callCenter(address, telNumber, isDelivery, isOpen, type){
-		return `
-			Բարև Ձեզ, Ձեզ սպասարկում է ${app.restaurantStaff[13].customer}ը
-			${
-				address = app.restaurantDetails[0].address !== undefined ? 
-				"Մեր հասցեն է" : 
-				"Կներեք, մենք հասցե չունենք"
-			}
-			${
-				telNumber = app.restaurantDetails[1].telNumber !== undefined ? 
-				"Մեր հեռախոսահամարն է " + app.restaurantDetails[1].telNumber : 
-				"Կներեք, մենք չունենք հեռախոսահամար"
-			}
-			${
-				isDelivery = app.restaurantDetails[6].isDelivery === true ? 
-				"Այո, կարող ենք իրականացնել Ձեր պատվերը" :
-				"Կներեք, բայց մեր առաքիչը զբաղված է, պետք է դուք մոտենաք"
-			}
-			${
-				isOpen = app.restaurantDetails[7].isOpen === true ? 
-				"Այո, ներկա պահին բաց ենք" :
-				"Ոչ, կներեք մենք փակ ենք"
+	callCenter(){
+		if (!app.restaurantDetails[7].isOpen) {
+			console.log("Կներեք, մենք փակ ենք։");
+		} else {
+			return `
+				Բարև Ձեզ, Ձեզ սպասարկում է ${app.restaurantStaff[13].customer}ը
+				${
+					app.restaurantDetails[0].address !== undefined ? 
+					"Մեր հասցեն է " + app.restaurantDetails[0].address : 
+					"Կներեք, մենք հասցե չունենք"
+				}
+				${
+					app.restaurantDetails[1].telNumber !== undefined ? 
+					"Մեր հեռախոսահամարն է " + app.restaurantDetails[1].telNumber : 
+					"Կներեք, մենք չունենք հեռախոսահամար"
+				}
+				${
+					app.restaurantDetails[6].isDelivery === true ? 
+					"Այո, կարող ենք իրականացնել Ձեր պատվերը" :
+					"Կներեք, բայց մեր առաքիչը զբաղված է, պետք է դուք մոտենաք"
+				}
+				${
+					app.restaurantDetails[7].isOpen === true ? 
+					"Այո, ներկա պահին բաց ենք" :
+					"Ոչ, կներեք մենք փակ ենք"
 			}`;
+		}
 	},
 	isOpened(start, end) {
 		start >= end ? 
@@ -110,7 +114,7 @@ const app = {
 	}
 };
 
-app.isOpened(9, 24);
+app.isOpened(24, 24);
 
 const client = app.callCenter();
 
