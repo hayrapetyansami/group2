@@ -1,21 +1,24 @@
 "use strict";
+// isVisibleMyDB
 const personalMovieDB = {
 	count: 0,
 	movies: {},
 	actors: {},
 	genres: [],
-	privat: false,
+	privat: true,
 	start: function () {
 		personalMovieDB.count = parseInt(prompt("Քանի՞ ֆիլմ եք դիտել այսօր", ""));
-	
-		while (personalMovieDB.count == "" || personalMovieDB.count == null || isNaN(personalMovieDB.count) || personalMovieDB.count < 0) {
+		
+		while (personalMovieDB.count == "" || personalMovieDB.count == null || isNaN(personalMovieDB.count) || personalMovieDB.count < -1) {
 			personalMovieDB.count = parseInt(prompt("Քանի՞ ֆիլմ եք դիտել այսօր", ""));
 		}
+	
+		return personalMovieDB.count;
 	},
 	rememberMyFilms: function () {
 		for (let i = 0; i < 2; i++) {
-			const a = prompt("Ո՞ր ֆիլմն եք վերջերս դիտել");
-			const b = prompt("Ինչքա՞ն այդ ֆիլմը կգնահատեիք");
+			const a = prompt("Ո՞ր ֆիլմն եք վերջերս դիտել", "");
+			const b = prompt("Ինչքա՞ն այդ ֆիլմը կգնահատեիք", "");
 		
 			if (!isNaN(b) && a != null && b != null && a.trim() != "" && b.trim() != "" && a.length < 50) {
 				personalMovieDB.movies[a] = b;
@@ -26,25 +29,15 @@ const personalMovieDB = {
 			}
 		}
 	},
-	detectUserPersonalLevel: function() {
+	detectUserPersonalLevel: function () {
 		if (personalMovieDB.count < 10) {
 			console.log("Դուք նայել եք բավականին քիչ ֆիլմեր");
 		} else if (personalMovieDB.count < 30) {
 			console.log("Դուք ֆիլմի սիրահար եք");
 		} else if (personalMovieDB.count >= 30) {
 			console.log("Դուք կինոման եք !!!");
-		}
-	},
-	showMyDB: function (show) {
-		if (show) {
-			console.log(personalMovieDB);
-		}
-	},
-	isVisibleMyDB: function(){
-		if (personalMovieDB.privat) {
-			personalMovieDB.privat = false;
 		} else {
-			personalMovieDB.privat = true;
+			console.log("Տեղի է ունեցել խնդիր, ըստ երևույթի դուք թիվ չեք նշել");
 		}
 	},
 	yourFavoriteGenres: function () {
@@ -54,39 +47,54 @@ const personalMovieDB = {
 		// 	if (genres != null && genres.trim() != "" && genres.length <= 20) {
 		// 		personalMovieDB.genres[i] = genres;
 		// 	} else {
+		// 		console.log("Դուք թույլ եք տվել սխալ, խնդրում ենք հետևել կանոններին !");
 		// 		i--;
 		// 	}
 		// }
 
 		for (let i = 1; i < 2; i++) {
-			let genres = prompt(`Թվարկեք ձեր նախընտրելի ժանրերը, եթե դրանք մեկից ավելին են, ապա խնդրում ենք առանձնացնել դրանք ստորակետերով`).toLowerCase().trim();
+			const genres = prompt("Թվարկեք ձեր նախընտրելի ժանրերը, եթե դրանք մեկից ավելի են, ապա խնդրում ենք առանձնացնել դրանք ստորակետերով", "");
 	
 			if (genres != null && genres.trim() != "") {
-				personalMovieDB.genres = genres.split(", ", 1000);
+				personalMovieDB.genres = genres.trim().toLowerCase().split(", ", 1000);
 				personalMovieDB.genres.sort();
 			} else {
-				console.log("Դուք թույլ եք տվել սխալ, խնդրում ենք հետևել կանոններին");
+				console.log("Դուք թույլ եք տվել սխալ, խնդրում ենք հետևել կանոններին !");
 				i--;
 			}
 		}
 
-		// personalMovieDB.genres.forEach(function (genre, i){
-		// 	if (i === 0) {
-		// 		console.log(`Ձեր սիրելի ${i + 1}ին Ժանրը։ ${genre}`);
-		// 	} else {
-		// 		console.log(`Ձեր սիրելի ${i + 1}րդ Ժանրը։ ${genre}`);
-		// 	}
+		// personalMovieDB.genres.forEach(function(genre, i){
+		// 	// if (i === 0) {
+		// 	// 	console.log(`Ձեր սիրելի ${i + 1}ին ժանրը։ ${genre}`);
+		// 	// } else {
+		// 	// 	console.log(`Ձեր սիրելի ${i + 1}րդ ժանրը։ ${genre}`);
+		// 	// }
+
+		// 	console.log(`Ձեր սիրելի ժանրը։ ${genre}`);
 		// });
+	},
+	isVisibleMyDB: function () {
+		if (personalMovieDB.privat) {
+			personalMovieDB.privat = false;
+		} else {
+			personalMovieDB.privat = true;
+		}
+	},
+	showMyDB: function (show) {
+		if (show) {
+			console.log(personalMovieDB);
+		}
 	},
 
 	// test function which can run our programm
-	run(){
+	run() {
 		personalMovieDB.start();
 		personalMovieDB.rememberMyFilms();
 		personalMovieDB.detectUserPersonalLevel();
-		personalMovieDB.showMyDB();
-		personalMovieDB.isVisibleMyDB();
 		personalMovieDB.yourFavoriteGenres();
+		personalMovieDB.isVisibleMyDB();
+		personalMovieDB.showMyDB(personalMovieDB.privat);
 	}
 };
 
