@@ -1,0 +1,57 @@
+.lime {
+	width: 250px;
+	height: 250px;
+	background: linear-gradient(green, yellow);
+	border-radius: 0px 60% 0px 60%;
+	margin-bottom: 30px;
+}
+
+button {
+	background: #000;
+	border: none;
+	color: #fff;
+	border-radius: 5px;
+	padding: 8px 32px;
+	cursor: pointer;
+	margin-bottom: 30px;
+}
+
+.flag {
+	width: 150px;
+	height: 40px;
+}
+
+.flag.red {
+	background-color: #f00;
+}
+.flag.blue {
+	background-color: #00f;
+}
+.flag.orange {
+	background-color: #ff8800;
+}
+
+.wrapper {
+	display: flex;
+	margin-top: 80px;
+	gap: 10px;
+}
+
+.wrapper .box {
+	width: 100px;
+	height: 100px;
+	cursor:no-drop;
+	background: #1c1c2c;
+}
+
+p {
+	font-family: cursive;
+	font-size: 20px;
+	color: #666;
+	letter-spacing: 1.5px;
+}
+
+p::selection {
+	background: yellow;
+	color: #f0f;
+}
