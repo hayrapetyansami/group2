@@ -21,23 +21,23 @@ button {
 	height: 40px;
 }
 
-.flag.red {
+.flag:nth-child(1) {
 	background-color: #f00;
 }
-.flag.blue {
+.flag:nth-child(2) {
 	background-color: #00f;
 }
-.flag.orange {
+.flag:nth-child(3) {
 	background-color: #ff8800;
 }
 
-.wrapper {
+#wrapper {
 	display: flex;
 	margin-top: 80px;
 	gap: 10px;
 }
 
-.wrapper .box {
+#wrapper .box {
 	width: 100px;
 	height: 100px;
 	cursor:no-drop;
