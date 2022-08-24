@@ -2,6 +2,10 @@
 const poster = document.querySelector("header img");
 const filmsBlock = document.querySelector("#films");
 const form = document.querySelector("#add");
+const signInModalBtn = document.querySelector("[data-in]");
+const signInModal = document.querySelector("[data-in-modal]");
+
+// modal-ի ակտիվ կլասսի անունը "modal_wrapper-active"
 
 function init (x) {
 	poster.src = `img/bg${x}.jpg`;
@@ -40,11 +44,9 @@ form.addEventListener("submit", (e) => {
 	createFilmsList(_DB.movies, filmsBlock);
 	e.target.reset();
 });
-
 function setSort(arr) {
 	arr.sort();
 }
-
 function createFilmsList (films, parent) {
 	parent.innerHTML = "";
 	setSort(films);
@@ -60,7 +62,6 @@ function createFilmsList (films, parent) {
 
 	removeFilmFromList("[data-rm]")
 }
-
 function removeFilmFromList (selector) {
 	setSort(_DB.movies);
 	document.querySelectorAll(selector).forEach((btn, index) => {
@@ -71,5 +72,4 @@ function removeFilmFromList (selector) {
 		});
 	});
 }
-
 createFilmsList(_DB.movies, filmsBlock);
