@@ -1,34 +1,43 @@
 "use strict";
 
-const date = new Date();
-
-// GET DATE
 // DATE API
-console.log(date.getFullYear()); // թվական օրինակ 2022
-console.log(date.getMonth()); // ամիս - 1
-console.log(date.getDay()); // շաբաթվա օր, օրինակ կիրակի = 0, շաբաթ = 6
-console.log(date.getDate()); // էս օրվա օրը, 23։59։59։999ից առաջ
-console.log(date.toLocaleTimeString()); // 8:18:05 PM
-console.log(date.toLocaleString()); // Տարի, Ամիս, Օր, Ժամ, Րոպե, Վայրկյան
-console.log(date.toDateString()); // Mon Aug 29 2022
+const date = new Date();
+console.log(date.getFullYear()); // թվականն ենք ստանում - 2022
+console.log(date.getMonth()); // ամիս -1
+console.log(date.getDay()); // ստանում ենք շաբաթվա օրը, կիրակի = 0
+console.log(date.getDate()); // ստանում ենք էս օրը, 23։59։59։999ից առաջ
 
 // TIME API
-console.log(date.getHours()); // ժամ
-console.log(date.getMinutes()); // րոպե
-console.log(date.getSeconds()); // վայրկյան
-console.log(date.getMilliseconds()); // միլիվայրկյան
+const time = new Date();
+console.log(time.getHours()); // ժամ
+console.log(time.getMinutes()); // րոպե
+console.log(time.getSeconds()); // վայրկյան
+console.log(time.getMilliseconds());// միլիվայրկյան
+console.log(time.getTime()); // միլիվայրկյան տվյալ պահից
+console.log(time.getTimezoneOffset()); // ժամային գոտի -240 րոպե
 
-console.log(Intl.DateTimeFormat().resolvedOptions().timeZone); // Asia/Yerevan
+// STANDART DATE & TIME API
+const dnt = new Date();
+console.log(dnt.toDateString()); // Wed Aug 31 2022
+console.log(dnt.toTimeString()); // 16:46:23 GMT+0400 (Armenia Standard Time)
 
+// LOCAL DATE & TIME API
+const localDNT = new Date();
+console.log(localDNT.toLocaleTimeString());
+console.log(localDNT.toLocaleDateString());
+console.log(localDNT.toLocaleString());
 
-const dateSetVariant = new Date();
-dateSetVariant.setFullYear(2011);
-dateSetVariant.setMonth(9);
-dateSetVariant.setDate(6);
-dateSetVariant.setHours(21);
-dateSetVariant.setMinutes(36);
-dateSetVariant.setSeconds(41);
-console.log(dateSetVariant);
+// TIME ZONE - ASIA/YEREVAN
+console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
+
+// SET
+const DSet = new Date();
+DSet.setFullYear(1254);
+DSet.setMonth(11);
+DSet.setDate(10);
+DSet.setHours(11);
+DSet.setMinutes(54);
+DSet.setMilliseconds(999);
 
 // ստուգում ենք մեր կոդի <Performance>-ը
 let start = new Date();
@@ -43,17 +52,3 @@ console.log(res + " : Response");
 let end = new Date();
 
 console.log(`Loop performance time: ${end - start} miliseconds`);
-
-// const elem = document.createElement("div");
-// document.body.append(elem)
-
-// Practice
-// setInterval(() => {
-// 	const date = new Date();
-// 	elem.innerHTML = `
-// 		<span>${date.getHours()}</span> :
-// 		<span>${date.getMinutes()}</span> :
-// 		<span>${date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds()}</span> : 
-// 		<span>${date.getMilliseconds()}</span>
-// 	`;
-// }, 0)
