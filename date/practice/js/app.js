@@ -5,10 +5,9 @@ function countDownLogic (endTime) {
 	const days = Math.floor( total / (1000 * 60 * 60 * 24) );
 	const seconds = Math.floor( (total / 1000) % 60 );
 	const minutes = Math.floor( (total / 1000 / 60) % 60 );
-	const hours = Math.floor( (total / (1000 * 60 * 60) % 24 ) );
+	const hours = Math.floor( (total / (1000 * 60 * 60)) % 24  );
 
 	return {
-		"endTime": endTime,
 		"total": total,
 		"days": days,
 		"seconds": seconds,
@@ -17,37 +16,41 @@ function countDownLogic (endTime) {
 	}
 }
 
-function coutDownIsNeedZero (num) {
-	return num >= 0 && num < 10 ? `0${num}` : num;
+function coutDownIsNeedZero (n) {
+	return n >= 0 && n < 10 ? `0${n}` : n;
 }
 
-function countDownApp (childType, endTime) {
-	const parent = document.querySelector("#timerApp");
-	const appInterval = setInterval(countDownUpdate, 1000);
+function countDownCreateHTML (elementType, day, hour, minute, second) {
+	const parent = document.querySelector("#count-down-app");
+	parent.innerHTML = `
+		<${elementType}>${day < 0 ? "00 " + " : " : day + " : "}</${elementType}>
+		<${elementType}>${hour < 0 ? "00 " + " : " : hour + " : "}</${elementType}>
+		<${elementType}>${minute < 0 ? "00 " + " : " : minute + " : "}</${elementType}>
+		<${elementType}>${second < 0 ? "00 " : second}</${elementType}>
+	`;
 
-	function countDownCreateHTML (day = 0, hour = 0, minute = 0, second = 0) {
-		parent.innerHTML = `
-			<${childType}>${day}</${childType}>
-			<${childType}>${hour}</${childType}>
-			<${childType}>${minute}</${childType}>
-			<${childType}>${second}</${childType}>
-		`;
-	}
-	
-	function countDownUpdate() {
+	return elementType;
+}
+
+function countDownUpdate(elementType, endTime) {
+	const timer = setInterval(() => {
 		const data = countDownLogic(endTime);
-		
 		countDownCreateHTML(
+			elementType,
 			coutDownIsNeedZero(data.days),
 			coutDownIsNeedZero(data.hours),
 			coutDownIsNeedZero(data.minutes),
-			coutDownIsNeedZero(data.seconds),
+			coutDownIsNeedZero(data.seconds)
 		);
 
 		if (data.total <= 0) {
-			clearInterval(appInterval);
+			clearInterval(timer);
 		}
-	}
+	}, 1000);
 }
 
-countDownApp("span", "2022-09-01")
+function countDownAppInit (elementType, endTime) {
+	countDownUpdate(elementType, endTime);
+}
+
+countDownAppInit("span", "2022-09-03");
