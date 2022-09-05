@@ -1,0 +1,49 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 300vh;
+}
+
+#text_container {
+	max-width: 600px;
+	margin: 40px auto;
+}
+
+#text_container p {
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 550px;
+	margin-bottom: 40px;
+}
+
+#text_container button {
+	display: inline-block;
+	margin-right: 20px;
+	padding: 8px 25px;
+	background: green;
+	color: #fff;
+	cursor: pointer;
+	border: none;
+	border-radius: 8px;
+}
+
+#text_container p span {
+	color: #f00;
+}
+
+#top {
+	display: none;
+	width: fit-content;
+	font-size: 30px;
+	background: #00f;
+	color: #fff;
+	cursor: pointer;
+	padding: 10px 15px;
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+}
