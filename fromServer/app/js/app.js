@@ -1,29 +1,37 @@
 "use strict";
-
 // CRUD = Create (POST), Read (GET), Update (PUT), Delete (DELETE)
-
 const root = document.querySelector("#root");
 
+const title = document.createElement("h1");
+const subTitle = document.createElement("p");
+const form = document.createElement("form");
 const screenBlock = document.createElement("div");
 const screenInput = document.createElement("input");
-const screenBtnAdd = document.createElement("button");
+const screenAddBtn = document.createElement("button");
 
 const listsBlock = document.createElement("div");
 
+title.textContent = "CRUD";
+subTitle.textContent = "Async Application";
+
+form.id = "app-form"
 screenBlock.id = "screenBlock"
 screenInput.type = "text";
 screenInput.placeholder = "Type here...";
-screenBtnAdd.textContent = "ADD";
+screenAddBtn.textContent = "ADD";
+screenAddBtn.id = "screenAddBtn";
 
 listsBlock.id = "listsBlock";
 
-root.prepend(screenBlock);
-root.append(listsBlock);
-screenBlock.append(screenInput, screenBtnAdd);
+root.prepend(title, subTitle);
+root.append(form);
+form.prepend(screenBlock);
+form.append(listsBlock);
+screenBlock.append(screenInput, screenAddBtn);
 
 const url = "http://localhost:8888/todo/";
 
-root.addEventListener("submit", function (e) {
+form.addEventListener("submit", function (e) {
 	e.preventDefault();
 	const val = screenInput.value.trim();
 
@@ -46,11 +54,15 @@ fetch(url)
 	data.forEach(todo => {
 		listsBlock.innerHTML += `
 			<div class="listsBlock__item">
-				<p>
+				<div class="listsBlock__item__content">
 					<span>${todo.id}</span>
-					${todo.title}
-				</p>
-				<button data-rm>Remove</button>
+					<input type="text" value="${todo.title}" readonly>
+				</div>
+				<div class="buttons">
+					<button data-rm>Remove</button>
+					<button data-ed>Edit</button>
+					<button data-sv>Save</button>
+				</div>
 			</div>
 		`;
 	});
@@ -59,19 +71,63 @@ fetch(url)
 })
 .then(data => {
 	const removeBtns = document.querySelectorAll("[data-rm]");
-	removeBtns.forEach(btn => {
+	const editBtns = document.querySelectorAll("[data-ed]");
+	const saveBtns = document.querySelectorAll("[data-sv]");
+
+	editBtns.forEach((btn, index) => {
 		btn.addEventListener("click", function () {
-			this.parentElement.remove();
+			const input = this.parentElement.previousElementSibling.lastElementChild;
 
-			data.forEach(todo => {
-				const fakeId = btn.previousElementSibling.firstElementChild.textContent;
+			input.classList.add("edit");
+			input.removeAttribute("readonly");
 
-				if (parseInt(fakeId) === todo.id) {
-					fetch(url+todo.id, {
-						method: "DELETE"
-					});
+			saveBtns.forEach((saveBtn, saveBtnIndex) => {
+				if (index === saveBtnIndex) {
+					saveBtn.style.display = "inline-block";
+					btn.style.display = "none";
 				}
-			})
+			}) 
 		});
 	});
+
+	function changeDB (btnArray, method) {
+		btnArray.forEach(btn => {
+			btn.addEventListener("click", function () {	
+				data.forEach(todo => {
+					const fakeId = btn.parentElement.previousElementSibling.firstElementChild.textContent;
+					const forEddited = btn.parentElement.previousElementSibling.lastElementChild;
+					if (parseInt(fakeId) === todo.id) {
+						fetch(`${url}${todo.id}`, {
+							method: method,
+							headers: {
+								"content-type":"application/json"
+							},
+							body: method === "PUT" ? JSON.stringify({title: forEddited.value.trim()}) : ""
+						});
+					}
+				})
+			});
+		});
+	}
+
+	changeDB(removeBtns, "DELETE");
+	changeDB(saveBtns, "PUT");
 });
+
+
+const a = 7;
+
+try {
+	console.log(a);
+	console.log(b);
+	console.log(c);
+} catch (err) {
+	console.log(err);
+	// throw new Error(err + " Barev dzez")
+} 
+
+// finally {
+// 	console.log("Ամեն ինչ շատ վատ էր");
+// }
+
+console.log(10);

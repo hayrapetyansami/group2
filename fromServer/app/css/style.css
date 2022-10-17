@@ -19,19 +19,19 @@ body {
 	margin: 0 auto;
 }
 
-#screenBlock {
+#root #app-form #screenBlock {
 	display: flex;
 	margin-bottom: 24px;
 }
 
-#screenBlock input {
+#root #app-form #screenBlock input {
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 5px 0px 0px 5px;
 	width: 100%;
 }
 
-#screenBlock button {
+#root #app-form #screenBlock #screenAddBtn {
 	background: #1a90d2;
 	color: #fff;
 	border: none;
@@ -40,27 +40,72 @@ body {
 	border-radius: 0px 5px 5px 0px;
 }
 
-#listsBlock .listsBlock__item {
+#root #app-form #listsBlock .listsBlock__item {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 16px;
+	margin-bottom: 12px;
 }
 
-#listsBlock .listsBlock__item button {
+#root #app-form #listsBlock .listsBlock__item .listsBlock__item__content span {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#root #app-form #listsBlock .listsBlock__item .listsBlock__item__content input {
+	border: 1px solid transparent;
+	padding: 7px 9px;
+	border-radius: 5px;
+}
+
+#root #app-form #listsBlock .listsBlock__item .listsBlock__item__content input.edit {
+	border-color: #ccc;
+}
+
+#root #app-form #listsBlock .listsBlock__item .buttons button {
 	padding: 8px 12px;
 	cursor: pointer;
 	border: none;
 	border-radius: 5px;
-	background: #f00900;
 	color: #fff;
 	transition: background 0.3s;
 }
 
-#listsBlock .listsBlock__item button:hover {
+#root #app-form #listsBlock .listsBlock__item .buttons [data-rm] {
+	background: #f00900;
+}
+
+#root #app-form #listsBlock .listsBlock__item .buttons [data-ed] {
+	background: #ffc000;
+}
+
+#root #app-form #listsBlock .listsBlock__item .buttons [data-sv] {
+	display: none;
+	background: #d900ff;
+}
+
+#root #app-form #listsBlock .listsBlock__item .buttons [data-rm]:hover {
 	background: #d41507;
 }
 
-#listsBlock .listsBlock__item p span {
-	margin-right: 10px;
+#root #app-form #listsBlock .listsBlock__item .buttons [data-ed]:hover {
+	background: #efb403;
+}
+
+#root #app-form #listsBlock .listsBlock__item .buttons [data-sv]:hover {
+	background: #c311e2;
+}
+
+
+h1 {
+	text-align: center;
+	margin-bottom: 12px;
+	color: #555;
+	letter-spacing: 1.5px;	
+}
+
+p {
+	margin-bottom: 12px;
+	text-align: center;
+	color: #566
 }

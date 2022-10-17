@@ -1,20 +1,16 @@
 {
   "todo": [
     {
-      "title": "Սովորել JavaScript",
+      "title": "Learn JavaScript",
       "id": 1
     },
     {
-      "title": "Սովորել TypeScript",
+      "title": "Learn TypeScript",
       "id": 2
     },
     {
-      "title": "Սովորել Vue",
+      "title": "Learn Vue.js",
       "id": 3
-    },
-    {
-      "title": "Սովորել Svelte",
-      "id": 4
     }
   ]
 }
