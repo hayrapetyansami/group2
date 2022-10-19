@@ -1,17 +1,16 @@
 {
   "name": "crud",
   "version": "0.0.1",
-  "description": "Group2 CRUD Application",
+  "description": "Group2 CRUD apllication",
   "main": "index.js",
   "scripts": {
     "start" : "json-server db.json -p 8888 -w true"
   },
   "keywords": [
     "CRUD",
-    "Native",
-    "JS",
-    "ToDO",
-    "Fetch"
+    "app",
+    "native",
+    "JS"
   ],
   "author": "Group2",
   "license": "ISC",
