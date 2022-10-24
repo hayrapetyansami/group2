@@ -1,0 +1,16 @@
+{
+  "name": "commonjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx webpack",
+    "build": "npx webpack build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-cli": "^4.10.0"
+  }
+}
