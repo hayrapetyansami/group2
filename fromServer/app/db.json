@@ -7,13 +7,8 @@
     },
     {
       "title": "Learn TypeScript",
-      "isComplete": false,
+      "isComplete": true,
       "id": 2
-    },
-    {
-      "title": "Learn Async/Await ES8",
-      "isComplete": false,
-      "id": 3
     }
   ]
 }
