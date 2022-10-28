@@ -26,7 +26,7 @@ eval("\r\n\r\nconst UI = __webpack_require__(/*! ./modules/ui */ \"./src/js/modu
   \************************************/
 /***/ ((module) => {
 
-eval("module.exports = function (url, checkArr, id) {\r\n\tcheckArr.forEach((check, index) => {\r\n\t\tcheck.addEventListener(\"change\", async () => {\r\n\t\t\tif (check.checked) {\r\n\t\t\t\tawait fetch(`${url}/${parseInt(id[index].textContent)}`, {\r\n\t\t\t\t\tmethod: \"PATCH\",\r\n\t\t\t\t\theaders: {\r\n\t\t\t\t\t\t\"content-type\": \"application/json\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\tbody: JSON.stringify({ isComplete: true })\r\n\t\t\t\t});\r\n\t\t\t} else {\r\n\t\t\t\tawait fetch(`${url}/${parseInt(id[index].textContent)}`, {\r\n\t\t\t\t\tmethod: \"PATCH\",\r\n\t\t\t\t\theaders: {\r\n\t\t\t\t\t\t\"content-type\": \"application/json\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\tbody: JSON.stringify({ isComplete: false })\r\n\t\t\t\t});\r\n\t\t\t}\r\n\t\t});\r\n\t})\r\n}\n\n//# sourceURL=webpack://crud/./src/js/modules/complete.js?");
+eval("module.exports = function (url, checkArr, id) {\r\n\tcheckArr.forEach((check, index) => {\r\n\t\tcheck.addEventListener(\"change\", async () => {\r\n\t\t\tasync function checkState (state) {\r\n\t\t\t\tawait fetch(`${url}/${parseInt(id[index].textContent)}`, {\r\n\t\t\t\t\tmethod: \"PATCH\",\r\n\t\t\t\t\theaders: {\r\n\t\t\t\t\t\t\"content-type\": \"application/json\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\tbody: JSON.stringify({ isComplete: state ? true : false })\r\n\t\t\t\t});\r\n\t\t\t}\r\n\r\n\t\t\tif (check.checked) {\r\n\t\t\t\tcheckState(true);\r\n\t\t\t} else {\r\n\t\t\t\tcheckState(false);\r\n\t\t\t}\r\n\t\t});\r\n\t})\r\n}\n\n//# sourceURL=webpack://crud/./src/js/modules/complete.js?");
 
 /***/ }),
 
@@ -36,7 +36,7 @@ eval("module.exports = function (url, checkArr, id) {\r\n\tcheckArr.forEach((che
   \****************************************/
 /***/ ((module) => {
 
-eval("module.exports = function (removeBtn, url) {\r\n\tremoveBtn.forEach(btn => {\r\n\t\tbtn.addEventListener(\"click\", async () => {\r\n\t\t\tconst a = confirm(\"Are you sure ?\");\r\n\r\n\t\t\tif (a) {\r\n\t\t\t\tconst fakeID = parseInt(btn.parentElement.previousElementSibling.firstElementChild.textContent);\r\n\t\t\t\tbtn.parentElement.parentElement.remove();\r\n\r\n\t\t\t\tawait fetch(`${url}/${fakeID}`, {\r\n\t\t\t\t\tmethod: \"DELETE\"\r\n\t\t\t\t});\r\n\t\t\t} else {\r\n\t\t\t\talert(\"Good\");\r\n\t\t\t}\r\n\t\t});\r\n\t});\r\n}\n\n//# sourceURL=webpack://crud/./src/js/modules/deleteMethod.js?");
+eval("module.exports = function (removeBtn, url) {\r\n\tremoveBtn.forEach(btn => {\r\n\t\tbtn.addEventListener(\"click\", async () => {\r\n\t\t\tconst isDelete = confirm(\"Are you sure ?\");\r\n\r\n\t\t\tif (isDelete) {\r\n\t\t\t\tconst fakeID = parseInt(btn.parentElement.previousElementSibling.firstElementChild.textContent);\r\n\t\t\t\tbtn.parentElement.parentElement.remove();\r\n\r\n\t\t\t\tawait fetch(`${url}/${fakeID}`, {\r\n\t\t\t\t\tmethod: \"DELETE\"\r\n\t\t\t\t});\r\n\t\t\t} else {\r\n\t\t\t\talert(\"Good\");\r\n\t\t\t}\r\n\t\t});\r\n\t});\r\n}\n\n//# sourceURL=webpack://crud/./src/js/modules/deleteMethod.js?");
 
 /***/ }),
 

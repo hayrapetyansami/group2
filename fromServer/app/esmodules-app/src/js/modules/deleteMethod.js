@@ -1,9 +1,10 @@
-module.exports = function (removeBtn, url) {
+export default function (removeBtn, url) {
 	removeBtn.forEach(btn => {
 		btn.addEventListener("click", async () => {
-			const a = confirm("Are you sure ?");
+			const isDelete = confirm("Are you sure ?");
+			console.log("OK DELETE");
 
-			if (a) {
+			if (isDelete) {
 				const fakeID = parseInt(btn.parentElement.previousElementSibling.firstElementChild.textContent);
 				btn.parentElement.parentElement.remove();
 

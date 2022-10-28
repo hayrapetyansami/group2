@@ -1,22 +1,20 @@
 module.exports = function (url, checkArr, id) {
 	checkArr.forEach((check, index) => {
 		check.addEventListener("change", async () => {
+			async function checkState (state) {
+				await fetch(`${url}/${parseInt(id[index].textContent)}`, {
+					method: "PATCH",
+					headers: {
+						"content-type": "application/json"
+					},
+					body: JSON.stringify({ isComplete: state ? true : false })
+				});
+			}
+
 			if (check.checked) {
-				await fetch(`${url}/${parseInt(id[index].textContent)}`, {
-					method: "PATCH",
-					headers: {
-						"content-type": "application/json"
-					},
-					body: JSON.stringify({ isComplete: true })
-				});
+				checkState(true);
 			} else {
-				await fetch(`${url}/${parseInt(id[index].textContent)}`, {
-					method: "PATCH",
-					headers: {
-						"content-type": "application/json"
-					},
-					body: JSON.stringify({ isComplete: false })
-				});
+				checkState(false);
 			}
 		});
 	})
