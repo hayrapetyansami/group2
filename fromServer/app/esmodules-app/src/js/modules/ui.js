@@ -28,9 +28,9 @@ export default {
 		this.filterUnComplete.setAttribute("data-filter", "filterUnComplete");
 		this.filterAll.setAttribute("data-filter", "filterAll");
 
-		this.filterComplete.textContent = "Completed"
-		this.filterUnComplete.textContent = "Uncompleted"
-		this.filterAll.textContent = "ALL"
+		this.filterComplete.textContent = "Complete";
+		this.filterUnComplete.textContent = "Uncomplete";
+		this.filterAll.textContent = "ALL";
 	},
 
 	appendElements() {
@@ -61,4 +61,4 @@ export default {
 		this.elementOptions();
 		this.appendElements();
 	}
-};
+}

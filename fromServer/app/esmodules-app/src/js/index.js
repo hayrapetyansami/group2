@@ -7,37 +7,26 @@ import PATCH from "./modules/patchMethod";
 import DELETE from "./modules/deleteMethod";
 import COMPLETE from "./modules/complete";
 import FILTER from "./modules/filter";
+import SELECT from "./modules/select";
 
-const url = "http://localhost:8888/todos";
+async function engine () {
+	const url = "http://localhost:8888/todos";
 
-UI.start();
+	UI.start();
 
-const { form, screenInput} = UI;
-POST(form, screenInput, url);
+	const { form, screenInput } = UI;
 
-async function engine() {
+	await POST(form, screenInput, url);
 	await GET(UI, url);
-	PATCH(
-		document.querySelectorAll(".editBtn"),
-		document.querySelectorAll(".saveBtn"),
-		document.querySelectorAll(".listsBlockItemContent"),
-		url
-	);
-	DELETE(
-		document.querySelectorAll(".removeBtn"),
-		url
-	);
-	COMPLETE(
-		url, 
-		document.querySelectorAll(".buttons input"), 
-		document.querySelectorAll(".listsBlockItemContent")
-	);
-	FILTER(
+	await SELECT(PATCH, DELETE, COMPLETE, url);
+	await FILTER(
 		document.querySelectorAll("[data-filter]"),
 		url,
-		UI
+		UI,
+		PATCH, 
+		DELETE, 
+		COMPLETE
 	)
 }
-
 
 engine();
