@@ -15,4 +15,4 @@ module.exports = function (removeBtn, url) {
 			}
 		});
 	});
-}
+};

@@ -17,6 +17,6 @@ module.exports = function (editBtnArray, saveBtnArray, content, url) {
 					body: JSON.stringify({ title: input.value.trim()})
 				});
 			});
-		})
+		});
 	});
-}
+};

@@ -7,17 +7,15 @@ const PUT = require("./modules/putMethod");
 const DELETE = require("./modules/deleteMethod");
 const COMPLETE = require("./modules/complete");
 
-const url = "http://localhost:8888/todos";
-
-
-UI.start();
-
-const { form, screenInput } = UI;
-
-POST(form, screenInput, url);
-
-
 async function engine() {
+	const url = "http://localhost:8888/todos";
+	
+	UI.start();
+
+	const { form, screenInput } = UI;
+
+	POST(form, screenInput, url);
+
 	await GET(UI, url);
 	PUT(
 		document.querySelectorAll(".editBtn"),
@@ -29,7 +27,11 @@ async function engine() {
 		document.querySelectorAll(".removeBtn"),
 		url
 	);
-	COMPLETE(url, document.querySelectorAll(".buttons input"), document.querySelectorAll(".listsBlockItemContent"))
+	COMPLETE(
+		url,
+		document.querySelectorAll(".buttons input"),
+		document.querySelectorAll(".listsBlockItemContent")
+	);
 }
 
 engine();

@@ -17,5 +17,5 @@ module.exports = function (url, checkArr, id) {
 				checkState(false);
 			}
 		});
-	})
-}
+	});
+};

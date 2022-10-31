@@ -14,4 +14,4 @@ module.exports = function (form, input, url) {
 
 		e.target.reset();
 	});
-}
+};
