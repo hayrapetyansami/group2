@@ -8,7 +8,7 @@ export default function (url, checkArr, id) {
 						"content-type": "application/json"
 					},
 					body: JSON.stringify({ isComplete: state ? true : false })
-				})
+				});
 			}
 
 			if (check.checked) {
@@ -18,4 +18,4 @@ export default function (url, checkArr, id) {
 			}
 		});
 	});
-}
+};

@@ -9,9 +9,9 @@ export default async function (form, input, url) {
 					"content-type": "application/json"
 				},
 				body: JSON.stringify({ title: input.value.trim(), isComplete: false })
-			})
+			});
 		}
 
 		e.target.reset();
 	});
-}
+};

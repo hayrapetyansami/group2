@@ -26,7 +26,7 @@ async function engine () {
 		PATCH, 
 		DELETE, 
 		COMPLETE
-	)
+	);
 }
 
 engine();

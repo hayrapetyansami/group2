@@ -14,4 +14,4 @@ export default async function (PATCH, DELETE, COMPLETE, url) {
 		document.querySelectorAll(".buttons input"),
 		document.querySelectorAll(".listsBlockItemContent")
 	);
-}
+};

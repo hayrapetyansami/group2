@@ -20,4 +20,4 @@ export default async function (btnArray, url, UI, PATCH, DELETE, COMPLETE) {
 			.then(() => SELECT(PATCH, DELETE, COMPLETE, url));
 		});
 	});
-}
+};

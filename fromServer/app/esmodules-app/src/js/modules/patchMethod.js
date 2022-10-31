@@ -15,8 +15,8 @@ export default function (editBtnArray, saveBtnArray, content, url) {
 						"content-type": "application/json"
 					},
 					body: JSON.stringify({ title: input.value.trim() })
-				})
+				});
 			});
 		});
-	})
-}
+	});
+};
