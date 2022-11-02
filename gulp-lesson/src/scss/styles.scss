@@ -1,0 +1,30 @@
+@import "./modules/reset";
+@import "./modules/main";
+
+$red : #b00111;
+
+body {
+	background: #444;
+	color: #f1f1f1;
+	font-family: Arial;
+}
+
+#root {
+	padding: 30px;
+
+	h1, h3 {
+		margin-bottom: 15px;
+		font-weight: normal;
+		letter-spacing: 4px;
+	}
+
+	p {
+		color: yellow;
+		font-size: 24px;
+		font-style: italic;
+		font-family: cursive;
+		letter-spacing: 2px;
+		max-width: 675px;
+		text-align: justify;
+	}
+}
