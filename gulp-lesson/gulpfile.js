@@ -11,6 +11,7 @@ import imagemin from "gulp-imagemin";
 import gcmq from "gulp-group-css-media-queries";
 import sourcemaps from "gulp-sourcemaps";
 import babel from "gulp-babel";
+import htmlmin from "gulp-htmlmin";
 
 // fix sass bug
 const sass = gulpSass(dartSass);
@@ -37,13 +38,13 @@ async function preproc () {
 		.pipe(browserSync.stream());
 }
 
-// task for other css files to concat in one file
-async function otherCSS () {
-	return gulp.src("./src/css/**/*.css")
+// task for the other css files to concat in one css file
+async function libsCSS () {
+	return gulp.src("./src/libsCSS/**/*.css")
 		.pipe(gcmq())
-		.pipe(concat("otherCSS.css"))
+		.pipe(concat("libs-css-file.css"))
 		.pipe(autoPrefixer({
-			overridebrowserslist: ["> 0.0001%"],
+			overrideBrowserslist: ["> 0.0001%"],
 			cascade: false
 		}))
 		.pipe(GulpCleanCss({
@@ -70,71 +71,75 @@ async function scripts () {
 		.pipe(browserSync.stream());
 }
 
-// task for pictures
+// task for pictures with imagemin
 async function pictures () {
 	return gulp.src("./src/img/**/*")
 		.pipe(imagemin())
 		.pipe(gulp.dest(path+"/img"));
 }
 
-// task for remove build folder
+// task for remove build folder and him files
 async function toClear () {
 	return deleteSync([path]);
 }
 
-// task for fonts folder to build folder
+// task for fonts
 async function fonts () {
-	return gulp.src("./src/fonts/**")
+	return gulp.src("./src/fonts/**/*")
 		.pipe(gulp.dest(path+"/fonts"));
 }
 
-// task for libs folder to build folder
-async function libs () {
-	return gulp.src("./src/libs/**")
-		.pipe(gulp.dest(path+"/libs"))
+// task for other js files (libs)
+async function libsJS () {
+	return gulp.src("./src/libsJS/**/*.js")
+		.pipe(gulp.dest(path+"/libsJS"))
 		.pipe(browserSync.stream());
 }
 
-// task for all html files
 async function htmls () {
-	return gulp.src("./src/*.html")
+	return gulp.src("./src/**/*.html")
+		.pipe(htmlmin({
+			collapseWhitespace: true,
+			removeTagWhitespace: true
+		}))
 		.pipe(gulp.dest(path))
 		.pipe(browserSync.stream());
 }
 
-// task for gulp watching
 async function watch () {
 	browserSync.init({
-		server: path,
+		server: {
+			baseDir: path
+		},
 		tunnel: false,
 		port: 3000 // default: 3000
 	});
 
-	gulp.watch("./src/scss/styles.scss", preproc);
-	gulp.watch("./src/css/**/*.css", otherCSS);
+	gulp.watch("./src/scss/**/*.scss", preproc);
+	gulp.watch("./src/libsCSS/**/*.css", libsCSS);
 	gulp.watch("./src/js/**/*.js", scripts);
 	gulp.watch("./src/img/**/*", pictures);
-	gulp.watch("./src/fonts/**", fonts);
-	gulp.watch("./src/libs/**", libs);
-	gulp.watch("./src/*.html", htmls);
-	gulp.watch("./*.html").on("change", browserSync.reload);
+	gulp.watch("./src/fonts/**/*", fonts);
+	gulp.watch("./src/libsJS/**/*.js", libsJS);
+	gulp.watch("./src/**/*.html", htmls);
+	gulp.watch("./**/*html").on("change", browserSync.reload);
 }
 
-// all gulp tasks
+//             run       script
 // gulp.task("toClear", toClear);
 // gulp.task("htmls", htmls);
 // gulp.task("preproc", preproc);
-// gulp.task("otherCSS", otherCSS);
+// gulp.task("libsCSS", libsCSS);
 // gulp.task("scripts", scripts);
 // gulp.task("pictures", pictures);
 // gulp.task("fonts", fonts);
-// gulp.task("libs", libs);
+// gulp.task("libsJS", libsJS);
 
 // task for stream our project
 gulp.task("watch", watch);
 
-// task for build / production
-gulp.task("build", gulp.series(toClear, gulp.parallel(htmls, preproc, otherCSS, scripts,  pictures, fonts, libs)));
+// task for build (production) our project
+gulp.task("build", gulp.series(toClear, gulp.parallel(htmls, preproc, libsCSS, scripts, pictures, fonts, libsJS)));
 
-// task for parallel build and watch taks
+// task for parallel build and watch tasks running
 gulp.task("dev", gulp.series("build", "watch"));
